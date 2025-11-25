@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Text, Index
+from sqlalchemy import Column, Integer, String, Text, Index, DateTime
+from datetime import datetime
 from pgvector.sqlalchemy import VECTOR
 from .db import Base
 
@@ -15,7 +16,23 @@ class DocumentChunk(Base):
     doc_name = Column(String(255), nullable=False)
     chunk_index = Column(Integer, nullable=False)
     content = Column(Text, nullable=False)
-    embedding = Column(VECTOR(dim=1536))  # match text-embedding-3-small dims
+    embedding = Column(VECTOR(dim=768))  # match text-embedding-3-small dims
     __table_args__ = (
         Index("ix_chunks_user_doc_idx", "user_id", "doc_name", "chunk_index"),
+    )
+
+class IngestJob(Base):
+    __tablename__ = "ingest_jobs"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    doc_name = Column(String(255), nullable=False)
+    file_path = Column(String(1024), nullable=False)
+    status = Column(String(50), nullable=False, default="pending")  # pending|processing|completed|failed
+    error = Column(Text, nullable=True)
+    created_at = Column(
+        DateTime, nullable=False, default=datetime.utcnow
+    )
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.utcnow
     )

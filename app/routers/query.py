@@ -7,7 +7,7 @@ from ..services.vector_store import VectorStore
 from ..services.rag import answer_query
 from .. import schemas
 
-from app.utils.logging import logger  # 👈 added logging
+from app.utils.logging import logger
 
 router = APIRouter(prefix="/api")
 

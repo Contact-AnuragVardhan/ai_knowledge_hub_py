@@ -11,3 +11,4 @@ passlib[bcrypt]
 python-jose[cryptography]
 pypdf
 python-docx
+sentence-transformers

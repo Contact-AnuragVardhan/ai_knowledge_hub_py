@@ -27,7 +27,7 @@ def hello():
     return "Hello from FastAPI!"
 
 
-# Global exception handler (nice for logging unexpected errors)
+# Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.exception(f"Unhandled error on path {request.url.path}: {exc}")

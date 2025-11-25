@@ -35,7 +35,6 @@ def extract_text(file: UploadFile) -> str:
         logger.exception(f"Failed to extract text from {filename}: {exc}")
         raise
 
-
 def embed_text(content: str) -> List[float]:
     logger.info(f"Creating embedding for content length={len(content)}")
     try:
@@ -46,7 +45,6 @@ def embed_text(content: str) -> List[float]:
     except Exception as exc:
         logger.exception(f"Embedding creation failed: {exc}")
         raise
-
 
 def chunk_and_store(user_id: int, doc_name: str, text: str, store: VectorStore):
     logger.info(

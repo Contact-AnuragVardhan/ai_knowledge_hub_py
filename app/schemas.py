@@ -27,3 +27,9 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     answer: str
     sources: List[str]
+
+class IngestJobStatus(BaseModel):
+    id: int
+    name: str
+    status: str
+    error: Optional[str] = None
